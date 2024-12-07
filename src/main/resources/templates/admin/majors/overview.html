@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout-admin.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Major</title>
+</head>
+<body>
+<section class="row" layout:fragment="content">
+    <div class="container mt-3">
+        <table class="w3-table-all table-bordered table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Faculty</th>
+                <th  style="width: 100px">Actives</th>
+            </tr>
+            <tr th:each="major : ${majors}">
+                <td th:text="${major.id}"></td>
+                <td th:text="${major.name}"></td>
+                <th th:text="${major.faculty.getName()}"></th>
+                <td >
+                    <form th:action="@{/major/modify}" method="get" style="display: inline;">
+                        <input type="hidden" name="id" th:value="${major.id}" />
+                        <button type="submit" class="icon-button btn-primary">
+                            <i class="fas fa-edit"></i><span></span>
+                        </button>
+                    </form>
+                    <form th:action="@{/major/delete}" method="post" style="display:inline;">
+                        <input type="hidden" name="id" th:value="${major.id}"/>
+                        <button type="submit" class="icon-button btn-primary">
+                            <i class="fas fa-trash"></i><span></span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <script>
+        </script>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{web/layout-user.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Major</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container mt-3 mb-3">
+        <table class="w3-table-all table-bordered table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Subject Name</th>
+                <th>Teacher Name</th>
+                <th style="width: 100px">Actives</th>
+            </tr>
+            <tr th:each="course : ${courses}">
+                <td th:text="${course.id}"></td>
+                <td th:text="${course.name}"></td>
+                <td th:text="${course.subject.name}"></td>
+                <td th:text="${course.teacher.name}"></td>
+                <td >
+                    <form id="courseFrom" th:action="@{/registration/user/add}" method="post" style="display: inline;">
+                        <input type="hidden" name="course_id" th:value="${course.id}"/>
+                        <input type="hidden" name="student_id" th:value="${student.id}"/>
+                        <button type="button" onclick="validateForm()" class="icon-button btn-primary">
+                            <i class="fas fa-registered"></i><span></span>
+                        </button>
+                    </form>
+                    <script>
+                        function validateForm() {
+
+                            let result = confirm("Bạn có chắc chắn muốn đăng ký học phần này?");
+                            if (result) {
+                                document.getElementById('courseFrom').submit();
+                            } else {
+                                alert("Hành động đã bị hủy.");
+                            }
+
+                        }
+                    </script>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+</body>
+</html>

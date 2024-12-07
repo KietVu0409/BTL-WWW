@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout-admin.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Major</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container mt-3 mb-3">
+        <table class="w3-table-all table-bordered table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Subject ID</th>
+                <th>Subject Name</th>
+                <th>Limited Number</th>
+                <th>Teacher Name</th>
+                <th style="width: 100px">Actives</th>
+            </tr>
+            <tr th:each="course : ${courses}">
+                <td th:text="${course.id}"></td>
+                <td th:text="${course.subject.getId()}"></td>
+                <td th:text="${course.name}"></td>
+                <td th:text="${course.limitedNumber}"></td>
+                <td th:text="${course.teacher.getName()}"></td>
+
+                <td >
+                    <form th:action="@{/course/modify}" method="get" style="display: inline;">
+                        <input type="hidden" name="id" th:value="${course.id}" />
+                        <button type="submit" class="icon-button btn-primary">
+                            <i class="fas fa-edit"></i><span></span>
+                        </button>
+                    </form>
+                    <form th:action="@{/course/delete}" method="post" style="display:inline;">
+                        <input type="hidden" name="id" th:value="${course.id}"/>
+                        <button type="submit" class="icon-button btn-primary">
+                            <i class="fas fa-trash"></i><span></span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <script>
+        </script>
+    </div>
+</section>
+</body>
+</html>

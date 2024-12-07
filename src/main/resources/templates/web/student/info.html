@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{web/layout-user.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Major</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .student-info {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .student-info h2 {
+            text-align: center;
+            color: #007bff;
+        }
+        .student-info p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .student-info label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .student-info button {
+            display: block;
+            width: 100%;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <section layout:fragment="content">
+        <div class="student-info mt-3 mb-3 ">
+            <form action="/student/user/modify" method="get">
+                <h2>Thông Tin Chi Tiết</h2>
+                <p>
+                    <label for="id">Mã Sinh Viên:</label>
+                    <span th:text="${student.id}" id="id"></span>
+                </p>
+                <p>
+                    <label for="name">Họ và tên:</label>
+                    <span th:text="${student.name}" id="name"></span>
+                </p>
+                <p>
+                    <label for="gender">Giới tính:</label>
+                    <span th:text="${student.gender}" id="gender"></span>
+                </p>
+                <p>
+                    <label for="address">Địa chỉ:</label>
+                    <span th:text="${student.address}" id="address"></span>
+                </p>
+                <p>
+                    <label for="email">Email:</label>
+                    <span th:text="${student.email}" id="email"></span>
+                </p>
+                <p>
+                    <label for="phone">Số điện thoại:</label>
+                    <span th:text="${student.phone}" id="phone"></span>
+                </p>
+                <p>
+                    <label for="dateOfBirth">Ngày sinh:</label>
+                    <span th:text="${#dates.format(student.dateOfBirth, 'yyyy-MM-dd')}" id="dateOfBirth"></span>
+                </p>
+                <p>
+                    <label for="major">Nghành:</label>
+                    <span th:text="${student.major.getName()}" id="major"></span>
+                </p>
+                <input type="hidden" name="id" th:value="${student.id}">
+                <button class="btn btn-primary" type="submit">
+                    <span>Sửa đổi thông tin</span>
+                </button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout-admin.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Major</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container mt-3">
+        <table class="w3-table-all table-bordered table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th  style="width: 100px">Actives</th>
+            </tr>
+            <tr th:each="student : ${students}">
+                <td >
+                    <form th:action="@{/student/modify}" method="get" style="display: inline;">
+                        <input type="hidden" name="id" th:value="${student.id}" />
+                        <button type="submit" class="icon-button btn-primary">
+                            <i class="fas fa-edit"></i><span></span>
+                        </button>
+                    </form>
+                    <form th:action="@{/student/delete}" method="post" style="display:inline;">
+                        <input type="hidden" name="id" th:value="${student.id}"/>
+                        <button type="submit" class="icon-button btn-primary">
+                            <i class="fas fa-trash"></i><span></span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+</body>
+</html>

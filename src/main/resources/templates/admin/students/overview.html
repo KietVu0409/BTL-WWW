@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout-admin.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Major</title>
+</head>
+<body>
+<section class="row" layout:fragment="content">
+    <div class="container mt-3">
+        <table class="w3-table-all table-bordered table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Date of birth</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Semester</th>
+                <th>Major</th>
+                <th  style="width: 100px">Actives</th>
+            </tr>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.id}"></td>
+                <td th:text="${student.name}"></td>
+                <td th:text="${student.gender}"></td>
+                <td th:text="${#dates.format(student.dateOfBirth, 'yyyy-MM-dd')}"></td>
+                <td th:text="${student.address}"></td>
+                <td th:text="${student.email}"></td>
+                <td th:text="${student.phone}"></td>
+                <td th:text="${student.semester}"></td>
+                <th th:text="${student.major.getName()}"></th>
+                <td >
+                    <form th:action="@{/student/modify}" method="get" style="display: inline;">
+                        <input type="hidden" name="id" th:value="${student.id}" />
+                        <button type="submit" class="icon-button btn-primary">
+                            <i class="fas fa-edit"></i><span></span>
+                        </button>
+                    </form>
+                    <form th:action="@{/student/delete}" method="post" style="display:inline;">
+                        <input type="hidden" name="id" th:value="${student.id}"/>
+                        <button type="submit" class="icon-button btn-primary">
+                            <i class="fas fa-trash"></i><span></span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+</body>
+</html>
